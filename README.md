@@ -4,7 +4,7 @@ Welcome aboard!
 This is my **developer portfolio website**, designed as a journey across the **Grand Line of Technology**. The site combines modern web development with a fun adventure theme inspired by *One Piece*, showcasing my projects, skills, and experiences.
 
 🌐 **Live Website:**  
-👉 https://portfolio-pranav00076s-projects.vercel.app/
+👉 [https://portfolio-pranav00076s-projects.vercel.app/](https://portfolio-rho-plum-23.vercel.app/)
 
 ---
 
