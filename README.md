@@ -5,6 +5,7 @@ This is my **developer portfolio website**, designed as a journey across the **G
 
 🌐 **Live Website:**  
 👉 [https://portfolio-pranav00076s-projects.vercel.app/](https://portfolio-rho-plum-23.vercel.app/)
+Best Visibility at 125% Zoom
 
 ---
 
