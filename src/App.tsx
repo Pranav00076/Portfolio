@@ -7,6 +7,8 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, Link, useParams, useNavigate, useLocation } from 'react-router-dom';
 import { motion, useScroll, useTransform, AnimatePresence, useSpring, useMotionValueEvent } from 'motion/react';
 import { GoogleGenAI } from "@google/genai";
+import { HelmetProvider, Helmet } from 'react-helmet-async';
+import { DriveImage } from '@driveloader/react';
 import { 
   Github, 
   Linkedin, 
@@ -17,6 +19,8 @@ import {
   Globe, 
   Terminal, 
   ChevronDown, 
+  ChevronLeft,
+  ChevronRight,
   Rocket, 
   Star,
   Layers,
@@ -775,7 +779,7 @@ const PirateTerminal = () => {
               </div>
             </div>
             
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-pirate text-white mb-2 md:mb-4 tracking-widest leading-tight text-center whitespace-nowrap">Hi, I'm Pranav Thawait</h2>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl xl:text-6xl font-pirate text-white mb-2 md:mb-4 tracking-widest leading-tight text-center">Hi, I'm Pranav Thawait</h2>
             <p className="text-gold-400 font-mono text-sm md:text-lg lg:text-xl mb-6 md:mb-10 text-center">Software Engineer & Luffy's Crewmate</p>
             
             <div className="flex flex-wrap justify-center gap-3 md:gap-6">
@@ -1301,6 +1305,10 @@ const ProjectDetails = ({ projectId, onBack }: { projectId?: string, onBack?: ()
       exit={{ opacity: 0 }}
       className={`${projectId ? 'pt-8 pb-12' : 'min-h-screen pt-32 pb-24'} relative z-10 bg-ocean-950/90 px-6 rounded-3xl`}
     >
+      <Helmet>
+        <title>{project.title} - Pranav Thawait</title>
+        <meta name="description" content={project.description} />
+      </Helmet>
       <div className="max-w-5xl mx-auto">
         <button 
           onClick={handleBack}
@@ -1849,10 +1857,12 @@ const CodeforcesShowcase = () => {
   );
 };
 
+const MotionDriveImage = motion.create(DriveImage);
+
 const HobbiesPage = ({ isInline, onBack }: { isInline?: boolean, onBack?: () => void }) => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState('Photography');
-  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImageIndex, setSelectedImageIndex] = useState<number | null>(null);
   
   useEffect(() => {
     if (!isInline) {
@@ -1873,28 +1883,28 @@ const HobbiesPage = ({ isInline, onBack }: { isInline?: boolean, onBack?: () => 
       title: "Photography",
       description: "Capturing the beauty of the Grand Line through my lens. From vibrant nature to the silent stars, I find stories in every frame.",
       icon: <Camera className="w-8 h-8" />,
-      externalLink: "https://pranav00076.github.io/PhotoTrance/",
+      externalLink: "https://photo-trance.vercel.app/",
       externalLinkText: "Visit PhotoTrance Gallery",
       bgImage: "https://imgs.search.brave.com/aDTlBHIk10Zgn9DmY9ZwoPOsaGvjOv7tMZa3CnAgFUA/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWFn/ZXMucGV4ZWxzLmNv/bS9waG90b3MvMTM4/MzI5NjgvcGV4ZWxz/LXBob3RvLTEzODMy/OTY4LmpwZWc_YXV0/bz1jb21wcmVzcyZj/cz10aW55c3JnYiZk/cHI9MSZ3PTUwMA",
       imageStyle: "gallery",
       images: [
-        "https://pin.it/3rS4NzQlH",
-        "https://pin.it/2eV71VLOj",
-        "https://pin.it/2mZ1zJRNe"
+        "https://drive.google.com/file/d/1byo1BFFFzUQ7ppsNUHCmPqkYQXXEXFVM/view?usp=sharing",
+        "https://drive.google.com/file/d/1Uswyg51FXx53mjxPgOfCy38_XA2NFK2n/view?usp=sharing",
+        "https://drive.google.com/file/d/1Tq10uzcE775gNh7J8TSiKmwBsdQFYE3G/view?usp=sharing"
       ]
     },
     {
       title: "Art",
       description: "Expressing creativity through sketches and digital illustrations. Inspired by the bold lines and vibrant colors of the pirate world.",
       icon: <Palette className="w-8 h-8" />,
-      externalLink: "https://drive.google.com/drive/folders/1s2Wo9QKf0XJOJPBsOd1FgpJ8mcIBOVh_",
-      externalLinkText: "View Full Gallery on Google Drive",
+      externalLink: "https://photo-trance.vercel.app/art",
+      externalLinkText: "View Full Gallery on PhotoTrance",
       bgImage: "https://imgs.search.brave.com/80WWBq2iAj2AGYW2CBL8vw2pEGga1t1caAi4n9R2cm4/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9jZG4u/d2FsbHBhcGVyc2Fm/YXJpLmNvbS81Mi83/Ny9zZEVnOHEzLndl/YnA",
       imageStyle: "gallery",
       images: [
-        "https://drive.google.com/uc?id=11bbg0WJyWRtz5oPpfGW4CkGciitHmE3a",
-        "https://drive.google.com/uc?id=1_7BeMOdmCVrQi0g3aJUGfdHFZyQpTnY5",
-        "https://drive.google.com/uc?id=1ooYw6ffepmWZH7taeJI3s5AkUsNN2RmL"
+        "https://drive.google.com/file/d/1c4h7RWNByX_NHdrXzmOulnVBT3PD6M1e/view?usp=sharing",
+        "https://drive.google.com/file/d/17IIBFgZBfVMKn32AMC7NGQOV8zyo-3M2/view?usp=sharing",
+        "https://drive.google.com/file/d/1jvS9GBv3iui8uKa_GlLlZ8V3DOVDJ3IM/view?usp=sharing"
       ]
     },
     {
@@ -1988,7 +1998,11 @@ const HobbiesPage = ({ isInline, onBack }: { isInline?: boolean, onBack?: () => 
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
             transition={{ duration: 0.4 }}
-            className="flex flex-col lg:flex-row gap-12 items-center"
+            className={`flex flex-col gap-12 ${
+              (activeHobby.title === 'Photography' || activeHobby.title === 'Art') 
+                ? '' 
+                : 'lg:flex-row items-center'
+            }`}
           >
             <div className="flex-1 space-y-6">
               <div className="text-gold-500 mb-4">{activeHobby.icon}</div>
@@ -2031,30 +2045,44 @@ const HobbiesPage = ({ isInline, onBack }: { isInline?: boolean, onBack?: () => 
               </div>
             </div>
 
-            <div className={`flex-1 grid ${(activeHobby as any).imageStyle === 'posters' ? 'grid-cols-3 gap-4' : 'grid-cols-2 gap-4'}`}>
+            <div className={`${
+              (activeHobby.title === 'Photography' || activeHobby.title === 'Art')
+                ? 'w-full grid grid-cols-1 md:grid-cols-3 gap-6 items-start'
+                : `flex-1 grid ${(activeHobby as any).imageStyle === 'posters' ? 'grid-cols-3 gap-4' : 'grid-cols-2 gap-4'}`
+            }`}>
               {activeHobby.images.map((img, i) => (
                 <motion.div 
                   key={i}
                   whileHover={{ scale: 1.05, rotate: i % 2 === 0 ? 2 : -2, zIndex: 10 }}
-                  onClick={() => setSelectedImage(img)}
+                  onClick={() => setSelectedImageIndex(i)}
                   className={`rounded-2xl overflow-hidden border-4 border-white/10 shadow-2xl cursor-pointer relative group ${
-                    (activeHobby as any).imageStyle === 'posters' 
+                    (activeHobby.title === 'Photography' || activeHobby.title === 'Art')
+                      ? 'aspect-auto'
+                      : (activeHobby as any).imageStyle === 'posters' 
                       ? 'aspect-[2/3]' 
                       : (i === 0 ? 'col-span-2 aspect-video' : 'aspect-square')
                   }`}
                 >
-                  <img 
-                    src={img} 
-                    alt={activeHobby.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                    referrerPolicy="no-referrer"
-                    onError={(e) => { 
-                      const target = e.currentTarget;
-                      if (!target.src.includes('unsplash.com')) {
-                        target.src = 'https://images.unsplash.com/photo-1493246507139-91e8bef99c02?q=80&w=800';
-                      }
-                    }}
-                  />
+                  {(activeHobby.title === 'Photography' || activeHobby.title === 'Art') ? (
+                    <DriveImage 
+                      src={img} 
+                      alt={activeHobby.title} 
+                      className="block w-full h-auto bg-black/50 transition-transform duration-500 group-hover:scale-110" 
+                    />
+                  ) : (
+                    <img 
+                      src={img} 
+                      alt={activeHobby.title} 
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+                      referrerPolicy="no-referrer"
+                      onError={(e) => { 
+                        const target = e.currentTarget;
+                        if (!target.src.includes('unsplash.com')) {
+                          target.src = 'https://images.unsplash.com/photo-1493246507139-91e8bef99c02?q=80&w=800';
+                        }
+                      }}
+                    />
+                  )}
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
                     <Search className="w-8 h-8 text-white opacity-0 group-hover:opacity-100 transition-opacity scale-50 group-hover:scale-100 duration-300" />
                   </div>
@@ -2066,36 +2094,109 @@ const HobbiesPage = ({ isInline, onBack }: { isInline?: boolean, onBack?: () => 
 
         {/* Lightbox */}
         <AnimatePresence>
-          {selectedImage && (
+          {selectedImageIndex !== null && (
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              onClick={() => setSelectedImage(null)}
-              className="fixed inset-0 z-[100000] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4 cursor-zoom-out"
+              className="fixed inset-0 z-[100000] bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
             >
-              <motion.img
-                initial={{ scale: 0.9, opacity: 0 }}
-                animate={{ scale: 1, opacity: 1 }}
-                exit={{ scale: 0.9, opacity: 0 }}
-                transition={{ type: "spring", damping: 25, stiffness: 300 }}
-                src={selectedImage}
-                alt="Enlarged view"
-                className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl border-2 border-gold-500/30"
-                referrerPolicy="no-referrer"
-                onError={(e) => { 
-                  const target = e.currentTarget;
-                  if (!target.src.includes('unsplash.com')) {
-                    target.src = 'https://images.unsplash.com/photo-1493246507139-91e8bef99c02?q=80&w=800';
-                  }
-                }}
-              />
               <button 
-                onClick={(e) => { e.stopPropagation(); setSelectedImage(null); }}
-                className="absolute top-6 right-6 text-white/50 hover:text-white bg-black/50 hover:bg-black/80 p-2 rounded-full transition-all"
+                onClick={(e) => { e.stopPropagation(); setSelectedImageIndex(null); }}
+                className="absolute top-6 right-6 z-50 text-white/50 hover:text-white bg-black/50 hover:bg-black/80 p-2 rounded-full transition-all"
               >
                 <X className="w-8 h-8" />
               </button>
+
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedImageIndex(prev => prev === 0 ? activeHobby.images.length - 1 : (prev as number) - 1);
+                }}
+                className="absolute left-4 md:left-10 z-50 text-white/50 hover:text-white bg-black/50 hover:bg-black/80 p-3 rounded-full transition-all hidden md:block"
+              >
+                <ChevronLeft className="w-8 h-8" />
+              </button>
+              
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setSelectedImageIndex(prev => prev === activeHobby.images.length - 1 ? 0 : (prev as number) + 1);
+                }}
+                className="absolute right-4 md:right-10 z-50 text-white/50 hover:text-white bg-black/50 hover:bg-black/80 p-3 rounded-full transition-all hidden md:block"
+              >
+                <ChevronRight className="w-8 h-8" />
+              </button>
+              
+              <div 
+                className="relative w-full h-[90vh] flex items-center justify-center overflow-hidden" 
+                onClick={() => setSelectedImageIndex(null)}
+              >
+                <AnimatePresence mode="wait">
+                  {(activeHobby.title === 'Photography' || activeHobby.title === 'Art') ? (
+                    <MotionDriveImage
+                      key={selectedImageIndex}
+                      initial={{ opacity: 0, x: 200 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -200 }}
+                      transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      dragElastic={0.2}
+                      onDragEnd={(e: any, { offset, velocity }: any) => {
+                        if (offset.x < -50 || velocity.x < -500) {
+                          setSelectedImageIndex(prev => prev === activeHobby.images.length - 1 ? 0 : (prev as number) + 1);
+                        } else if (offset.x > 50 || velocity.x > 500) {
+                          setSelectedImageIndex(prev => prev === 0 ? activeHobby.images.length - 1 : (prev as number) - 1);
+                        }
+                      }}
+                      src={activeHobby.images[selectedImageIndex]}
+                      alt="Enlarged view"
+                      className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl border-2 border-gold-500/30 cursor-grab active:cursor-grabbing pointer-events-auto"
+                      onClick={(e: any) => e.stopPropagation()}
+                    />
+                  ) : (
+                    <motion.img
+                      key={selectedImageIndex}
+                      initial={{ opacity: 0, x: 200 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -200 }}
+                      transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      dragElastic={0.2}
+                      onDragEnd={(e, { offset, velocity }) => {
+                        if (offset.x < -50 || velocity.x < -500) {
+                          setSelectedImageIndex(prev => prev === activeHobby.images.length - 1 ? 0 : (prev as number) + 1);
+                        } else if (offset.x > 50 || velocity.x > 500) {
+                          setSelectedImageIndex(prev => prev === 0 ? activeHobby.images.length - 1 : (prev as number) - 1);
+                        }
+                      }}
+                      src={activeHobby.images[selectedImageIndex]}
+                      alt="Enlarged view"
+                      className="max-w-full max-h-[90vh] object-contain rounded-lg shadow-2xl border-2 border-gold-500/30 cursor-grab active:cursor-grabbing pointer-events-auto"
+                      referrerPolicy="no-referrer"
+                      onClick={(e) => e.stopPropagation()}
+                      onError={(e) => { 
+                        const target = e.currentTarget;
+                        if (!target.src.includes('unsplash.com')) {
+                          target.src = 'https://images.unsplash.com/photo-1493246507139-91e8bef99c02?q=80&w=800';
+                        }
+                      }}
+                    />
+                  )}
+                </AnimatePresence>
+                
+                <div className="absolute bottom-6 flex gap-2 z-50">
+                  {activeHobby.images.map((_, idx) => (
+                    <button
+                      key={idx}
+                      onClick={(e) => { e.stopPropagation(); setSelectedImageIndex(idx); }}
+                      className={`h-2 rounded-full transition-all ${idx === selectedImageIndex ? 'bg-gold-500 w-8' : 'bg-white/30 hover:bg-white/60 w-2'}`}
+                    />
+                  ))}
+                </div>
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
@@ -2178,6 +2279,10 @@ const HomePage = () => {
       } : {}}
       transition={{ duration: 0.4 }}
     >
+      <Helmet>
+        <title>Pranav Thawait - The Explorer's Log</title>
+        <meta name="description" content="Portfolio of Pranav Thawait, Software Engineer & Tech Explorer." />
+      </Helmet>
       <StarShower />
       <FloatingShips onClash={handleClash} />
       <HakiLightning trigger={clashPos} />
@@ -2251,6 +2356,39 @@ const HomePage = () => {
                 <div className="text-wood-800/60 text-[10px] uppercase tracking-widest font-bold">Hackathons</div>
               </div>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Github Stats Section */}
+      <section id="github-stats" className="py-24 px-6 max-w-6xl mx-auto relative z-10">
+        <SectionTitle title="Pirate Bounty Board" subtitle="GitHub Stats" island="Sabaody Archipelago" />
+        
+        <div className="grid md:grid-cols-2 gap-8 items-center max-w-4xl mx-auto mt-12">
+          <motion.div 
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="parchment-card p-4 rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] transition-shadow duration-300 pointer-events-none"
+          >
+            <img 
+              src="https://github-readme-stats.vercel.app/api?username=Pranav00076&show_icons=true&theme=transparent&title_color=8b0000&text_color=3e2723&text_bold=false&icon_color=8b0000&hide_border=true" 
+              alt="GitHub Stats" 
+              className="w-full h-auto drop-shadow-sm pointer-events-none"
+            />
+          </motion.div>
+
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="parchment-card p-4 rounded-xl shadow-[0_0_20px_rgba(245,158,11,0.2)] hover:shadow-[0_0_30px_rgba(245,158,11,0.4)] transition-shadow duration-300 pointer-events-none"
+          >
+            <img 
+              src="https://github-readme-stats.vercel.app/api/top-langs/?username=Pranav00076&layout=compact&theme=transparent&title_color=8b0000&text_color=3e2723&text_bold=false&icon_color=8b0000&hide_border=true" 
+              alt="Top Languages" 
+              className="w-full h-auto drop-shadow-sm pointer-events-none"
+            />
           </motion.div>
         </div>
       </section>
